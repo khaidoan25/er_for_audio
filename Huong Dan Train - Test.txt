@@ -1,0 +1,26 @@
+convert_data.py:
+    + Thư viện: librosa
+
+processing_data_gray.py:
+    + Thư viện: Pillow
+
+train_model_gray.py:
+    + Thư viện: tensorflow 2.0
+
+processing_data_stft.py:
+    + Thư viện: librosa
+
+train_model_stft.py:
+    + Thư viện: tensorflow 2.0
+
+# Đăng
+
+
+
+
+# Predict
+predict_model_gray.py:
+    + Thư viện: tensorflow 2.0
+
+predict_model_stft.py:
+    + Thư viện: tensorflow 2.0
