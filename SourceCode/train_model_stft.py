@@ -12,7 +12,7 @@ def model_stft(time_step, n_stft):
 
     inputs_stft = Input(shape=(time_step, n_stft,), name="input_stft")
     stft = LSTM(128, return_sequences=True, dropout=0.3)(inputs_stft)
-    stft = Bidirectional(LSTM(256, dropout=0.3, return_sequence=True, kernel_regularizer=tf.keras.regularizers.l2, recurrent_regularizer=tf.keras.regularizers.l2), merge_mode="concat")(stft)
+    stft = Bidirectional(LSTM(256, dropout=0.3, return_sequences=True, kernel_regularizer=tf.keras.regularizers.l2, recurrent_regularizer=tf.keras.regularizers.l2), merge_mode="concat")(stft)
     
     scores_stft = Dense(1, use_bias=False, name="score_stft")(stft)
     att_w_stft = Softmax(name="att_weight_stft")(scores_stft)

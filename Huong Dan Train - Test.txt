@@ -1,20 +1,24 @@
-convert_data.py:
-    + Thư viện: librosa
 
-processing_data_gray.py:
-    + Thư viện: Pillow
+
+# Processing
+convert_data.py
+
+processing_data_gray.py
+
+processing_data_stft.py
+
+processing_data_rgb.py
+
+
+# Training
+train_model_stft.py:
+    + Thư viện: tensorflow 2.0
 
 train_model_gray.py:
     + Thư viện: tensorflow 2.0
 
-processing_data_stft.py:
-    + Thư viện: librosa
-
-train_model_stft.py:
-    + Thư viện: tensorflow 2.0
-
-# Đăng
-
+train_model_rgb.py:
+    + Thư viện tensorflow 1
 
 
 
@@ -24,3 +28,12 @@ predict_model_gray.py:
 
 predict_model_stft.py:
     + Thư viện: tensorflow 2.0
+
+predict_model_rgb.py:
+    + Thư viện: tensorflow 1
+
+
+# Inference
+ensemble.py
+
+=> Nộp file submission.csv

@@ -96,6 +96,6 @@ if __name__ == "__main__":
     )
 
     print("Training model ...")
-    model.fit(X_train, y_train, batch_size=128, epochs=100, callbacks=[checkpoint_callback])
-
-    model.fit_generator(datagen.flow(X_train, y_train, batch_size=128), steps_per_epoch=len(X_train)/128, epochs=100, callbacks=[checkpoint_callback])
+    model.fit(X_train, y_train, batch_size=64, epochs=100, callbacks=[checkpoint_callback])
+    model.load_weights(checkpoint_prefix)
+    model.fit_generator(datagen.flow(X_train, y_train, batch_size=32), steps_per_epoch=len(X_train)/32, epochs=100, callbacks=[checkpoint_callback])

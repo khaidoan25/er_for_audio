@@ -1,6 +1,4 @@
 import os
-import matplotlib
-matplotlib.use('Agg') # No pictures displayed 
 import pylab
 import librosa
 import librosa.display
@@ -33,16 +31,16 @@ def convert_melspectogram_to_jpg(srcname, distname):
     pylab.close()
 
 if __name__ == "__main__":
-    fileList_train = get_filename('Dataset/Train')
+    fileList_train = get_filename('../Dataset/TrainSet')
 
     for i in tqdm.tqdm(range(0, len(fileList_train))):
-        srcname = 'Dataset/TrainSet/' + fileList_train[i]
+        srcname = '../Dataset/TrainSet/' + fileList_train[i]
         distname = 'mel_CNN_train/' + fileList_train[i].replace('.wav','.jpg')
         convert_melspectogram_to_jpg(srcname, distname)
 
-    fileList_test = get_filename('Dataset/Test')
+    fileList_test = get_filename('../Dataset/TestSet')
 
     for i in tqdm.tqdm(range(0, len(fileList_test))):
-        srcname = 'Dataset/TestSet/' + fileList_test[i]
+        srcname = '../Dataset/TestSet/' + fileList_test[i]
         distname = 'mel_CNN_test/' + fileList_test[i].replace('.wav','.jpg')
         convert_melspectogram_to_jpg(srcname, distname)

@@ -1,0 +1,7 @@
+librosa
+tqdm
+h5py
+pandas
+tensorflow 1.14
+pillow
+keras

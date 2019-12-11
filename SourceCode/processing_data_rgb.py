@@ -5,10 +5,10 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from numpy import load
 import pandas as pd
 from tqdm import tqdm
+from glob import glob
+import h5py
 
 import tensorflow as tf
-from sklearn.model_selection import train_test_split
-from keras.preprocessing.image import ImageDataGenerator
 from PIL import Image
 
 def generate_data(image_paths, size=224):
@@ -25,15 +25,15 @@ def generate_data(image_paths, size=224):
 
 
 def trans(x):
-  x = x[:-3]
-  x = x + "jpg"
-  return x
+    x = x[:-3]
+    x = x + "jpg"
+    return x
 
 if __name__ == "__main__":
-    train_file = pd.read_csv("train_label.csv")["File"]
+    train_file = pd.read_csv("train_label.csv")
 
-    train_files = [os.path.join('mel_CNN_train/', trans(file)) for file in train_file]
-    test_files = [os.path.join('mel_CNN_test/', trans(file)) for file in glob(os.path.join("Dataset/TestSet", "*"))]
+    train_files = [os.path.join('mel_CNN_train/', trans(file)) for file in train_file.File]
+    test_files = [os.path.join('mel_CNN_test/', trans(file)) for file in glob(os.path.join("../Dataset/TestSet", "*"))]
 
     train = generate_data(train_files)
     test = generate_data(test_files)
