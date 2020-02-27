@@ -1,26 +1,60 @@
-convert_data.py:
-    + Thư viện: librosa
+Tạo 2 môi trường và cài các thư viện theo file env_1.txt và env_2.txt
+Phiên bản python 3.6
+Chạy file theo thứ tự từ trên xuống dưới
 
-processing_data_gray.py:
-    + Thư viện: Pillow
+# Processing
+convert_data.py
+    + env_1
 
-train_model_gray.py:
-    + Thư viện: tensorflow 2.0
+split_train_test.py
+    + env_1
 
-processing_data_stft.py:
-    + Thư viện: librosa
+processing_data_gray.py
+    + env_1
 
-train_model_stft.py:
-    + Thư viện: tensorflow 2.0
+processing_data_stft.py
+    + env_1
 
-# Đăng
+processing_data_rgb.py
+    + env_1
 
 
+# Training
+train_model_stft_1.py
+    + env_1
+train_model_stft_2.py
+    + env_1
+train_model_stft_3.py
+    + env_1
+
+train_model_gray_1.py
+    + env_1
+train_model_gray_2.py
+    + env_1
+train_model_gray_3.py
+    + env_1
+
+train_model_rgb_1.py
+    + env_2
+train_model_rgb_2.py
+    + env_2
+train_model_rgb_3.py
+    + env_2
 
 
 # Predict
-predict_model_gray.py:
-    + Thư viện: tensorflow 2.0
+predict_model_gray.py
+    + env_1
 
-predict_model_stft.py:
-    + Thư viện: tensorflow 2.0
+predict_model_stft.py
+    + env_1
+
+predict_model_rgb.py
+    + env_2
+
+
+# Inference
+ensemble.py
+    + env_1
+
+=> Nộp file submission.csv

@@ -68,10 +68,11 @@ def model_gray():
 
 if __name__ == "__main__":
 
-    with h5py.File(os.path.join("dataset_gray.h5"), "r") as hf:
+    with h5py.File(os.path.join("dataset_gray_1.h5"), "r") as hf:
         X_train = np.expand_dims(hf["X_tr"][:], axis=-1)
         y_train = hf["y_tr"][:]
-        # X_test = np.expand_dims(hf["X_te"][:], axis=-1)
+        X_test = np.expand_dims(hf["X_te"][:], axis=-1)
+        y_test = hf["y_te"][:]
 
     datagen = ImageDataGenerator(
         width_shift_range=0.2,
@@ -85,7 +86,7 @@ if __name__ == "__main__":
     # Directory where the checkpoints will be saved
     checkpoint_dir = "ckpt_gray"
     # Name of the checkpoint files
-    checkpoint_prefix = os.path.join(checkpoint_dir, "model_gray.h5")
+    checkpoint_prefix = os.path.join(checkpoint_dir, "model_gray_1.h5")
 
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         monitor='val_accuracy',
@@ -96,6 +97,7 @@ if __name__ == "__main__":
     )
 
     print("Training model ...")
-    model.fit(X_train, y_train, batch_size=128, epochs=100, callbacks=[checkpoint_callback])
-
-    model.fit_generator(datagen.flow(X_train, y_train, batch_size=128), steps_per_epoch=len(X_train)/128, epochs=100, callbacks=[checkpoint_callback])
+    model.fit_generator(datagen.flow(X_train, y_train, batch_size=32), 
+                        steps_per_epoch=len(X_train)/32,
+                        validation_data=(X_test, y_test),
+                        epochs=150, callbacks=[checkpoint_callback])

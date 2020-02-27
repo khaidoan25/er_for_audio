@@ -12,7 +12,7 @@ def model_stft(time_step, n_stft):
 
     inputs_stft = Input(shape=(time_step, n_stft,), name="input_stft")
     stft = LSTM(128, return_sequences=True, dropout=0.3)(inputs_stft)
-    stft = Bidirectional(LSTM(256, dropout=0.3, return_sequence=True, kernel_regularizer=tf.keras.regularizers.l2, recurrent_regularizer=tf.keras.regularizers.l2), merge_mode="concat")(stft)
+    stft = Bidirectional(LSTM(256, dropout=0.3, return_sequences=True, kernel_regularizer=tf.keras.regularizers.l2, recurrent_regularizer=tf.keras.regularizers.l2), merge_mode="concat")(stft)
     
     scores_stft = Dense(1, use_bias=False, name="score_stft")(stft)
     att_w_stft = Softmax(name="att_weight_stft")(scores_stft)
@@ -33,9 +33,11 @@ def model_stft(time_step, n_stft):
     return model
 
 if __name__ == "__main__":
-    with h5py.File(os.path.join("dataset_stft.h5"), "r") as hf:
+    with h5py.File(os.path.join("dataset_stft_2.h5"), "r") as hf:
         X_train = hf["X_tr"][:]
         y_train = hf["y_tr"][:]
+        X_test = hf["X_te"][:]
+        y_test = hf["y_te"][:]
 
     model = model_stft(118, 257)
     model.summary()
@@ -43,7 +45,7 @@ if __name__ == "__main__":
     # Directory where the checkpoints will be saved
     checkpoint_dir = "ckpt_stft"
     # Name of the checkpoint files
-    checkpoint_prefix = os.path.join(checkpoint_dir, "model_stft.h5")
+    checkpoint_prefix = os.path.join(checkpoint_dir, "model_stft_2.h5")
 
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         monitor='val_accuracy',
@@ -54,4 +56,4 @@ if __name__ == "__main__":
     )
 
     print("Training model ...")
-    model.fit(X_train, y_train, batch_size=128, epochs=150, callbacks=[checkpoint_callback])
+    model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=64, epochs=150, callbacks=[checkpoint_callback])
